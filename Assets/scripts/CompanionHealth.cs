@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class CompanionHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 3f;
-    [SerializeField] private float invulnerabilityTime = 1f; // grace period between hits
+    [SerializeField] private float invulnerabilityTime = 1f;
     [SerializeField] private Renderer rend;
     [SerializeField] private Color hurtColor = Color.white;
 
@@ -18,7 +18,7 @@ void Start()
 
 public void TakeDamage(float amount)
     {
-        if (Time.time - lastHitTime < invulnerabilityTime) return; // still in grace period
+        if (Time.time - lastHitTime < invulnerabilityTime) return; 
         lastHitTime = Time.time;
 
         currentHealth -= amount;
@@ -35,7 +35,7 @@ public void TakeDamage(float amount)
 
 System.Collections.IEnumerator Flash()
     {
-        Color preFlashColor = rend.material.color; // captured fresh -- respects whatever corruption tint is currently applied
+        Color preFlashColor = rend.material.color;
         rend.material.color = hurtColor;
         yield return new WaitForSeconds(0.12f);
         rend.material.color = preFlashColor;
@@ -45,7 +45,6 @@ System.Collections.IEnumerator Flash()
 public void PlayerDies()
     {
         Debug.Log("The heart is gone. You die.");
-        // For now: restart the scene. Later: death animation, fade, checkpoint.
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
