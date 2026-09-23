@@ -1,9 +1,8 @@
 using UnityEngine;
 
-// A beautiful object that pulls the companion toward it. Threats in this game
-// don't chase -- they lure. Pull scales from 0 at the edge of lureRadius to
-// full strength at the center; inside captureRadius the heart stands still,
-// mesmerized, until the player picks it up.
+// A beautiful object that lures the companion toward it. The pull gets stronger
+// closer to the center; inside captureRadius, the heart stops and is mesmerized
+// until the player picks it up.
 public class HeartLure : MonoBehaviour
 {
     [SerializeField] private float lureRadius = 4f;
@@ -25,7 +24,7 @@ public class HeartLure : MonoBehaviour
         isCaptured = dist <= captureRadius;
         if (isCaptured) return Vector3.zero;
 
-        float t = 1f - (dist / lureRadius); // 0 at edge, 1 at center
+        float t = 1f - (dist / lureRadius);
         return toLure.normalized * lureStrength * t;
     }
 
