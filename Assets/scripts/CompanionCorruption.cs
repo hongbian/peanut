@@ -1,12 +1,11 @@
 using UnityEngine;
 
-// A mesmerized heart doesn't lose health -- it slowly turns doll-like, like the
-// Beauty's collected hearts. Read entirely off the companion's own body (no HUD):
-// color drains toward porcelain, eyes shrink and dull, movement slows.
+// A mesmerized heart slowly becomes doll-like: its color fades, eyes dull,
+// and movement slows.
 public class CompanionCorruption : MonoBehaviour
 {
-    [SerializeField] private float gainRate = 0.04f;     // per second while mesmerized
-    [SerializeField] private float recoveryRate = 0.01f; // per second while carried/close -- slower than gain, scars linger
+    [SerializeField] private float gainRate = 0.04f;  
+    [SerializeField] private float recoveryRate = 0.01f; 
     [SerializeField] private Transform player;
     [SerializeField] private Color porcelainColor = new Color(0.85f, 0.83f, 0.8f, 1f);
     [SerializeField] private Transform eyeL;
@@ -28,7 +27,7 @@ public class CompanionCorruption : MonoBehaviour
         health = GetComponent<CompanionHealth>();
         rend = GetComponent<Renderer>();
         baseColor = rend.material.color;
-        if (eyeL != null) eyeBaseScale = eyeL.localScale; // eyes share the same base scale
+        if (eyeL != null) eyeBaseScale = eyeL.localScale; 
         if (player != null) carry = player.GetComponent<CompanionCarry>();
     }
 
@@ -42,7 +41,6 @@ public class CompanionCorruption : MonoBehaviour
         }
         else if (follow != null && follow.IsMesmerized)
         {
-            // corruption comes only from being captured, never from mere drifting
             Corruption += gainRate * Time.deltaTime;
         }
         else if (IsCloseToPlayer())
